@@ -15,10 +15,10 @@ function createWindow () {
 // Standard stuff
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1000, height: 600})
+  mainWindow = new BrowserWindow({width: 1100, height: 600})
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('cdrSelection.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -36,9 +36,9 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () =>{
-  let mainWindow = new BrowserWindow({width: 1000, height: 600});
+  let mainWindow = new BrowserWindow({width: 1100, height: 600});
  
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
+  mainWindow.loadURL(`file://${__dirname}/cdrSelection.html`);
   // the rest...
 });
 
