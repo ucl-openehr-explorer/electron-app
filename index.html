@@ -29,10 +29,10 @@
           <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
               <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                      <a class="nav-link" href="#">Select CDRs</a>
+                      <a id="CDRButton" class="nav-link" href="#">Select CDRs</a>
                   </li>
                   <li class="nav-item">
-                      <a id="templateButton"class="nav-link" href="#">Select Template</a>
+                      <a id="templateButton" class="nav-link" href="#">Select Template</a>
                   </li>
               </ul>
           </div>
@@ -50,28 +50,55 @@
       <div class = "grid-item" style=" margin-left: 2%; width:500px">
           <form>
             <div class="form-group">
-              <label for="usr">AQL:</label>
+              <label for="usr">AQL</label>
                   <textarea style="width:450px;" class="form-control" rows="7" placeholder="Write your AQL code here" required></textarea>
             </div>
             <button style="float: right; font-size: 15px; margin-right:2%">Query</button>
           </form>
         </div>
 
-    <div id = "mayHide">
-        <div class = "grid-item" style="right: 0px; float:right; margin-left: 2%; width:500px;">
-            <form>
-              <div class="form-group">
-                <label for="usr">Template:</label>
-                    <textarea style="width:450px;" class="form-control" rows="7" placeholder="Templates will be generated here" required></textarea>
-              </div>
-              <input type='button' id='hide' value='Hide' style="float:right; font-size: 15px; margin-right: 2%">
-            </form>
-        </div>
+    <div id="mayHide" class = "grid-item" style="right: 0px; float:right; margin-left: 2%; width:500px;">
+        <form>
+            <div class="form-group">
+            <label for="usr">Select Template</label>
+                <textarea style="width:450px;" class="form-control" rows="7" placeholder="Templates will be generated here" required></textarea>
+            </div>
+            <input type='button' id='hide' value='Hide' style="float:right; font-size: 15px; margin-right: 2%">
+        </form>
+    </div>
+    
+
+    
+    <div style="display:none" id="mayHide2" class = "grid-item" style="margin-left: 2%; width: 500px;">
+        <label for="usr">Select CDRs</label>
+        <table style="width:450px;" class= "smallTR">
+            <tr>
+                <th style="width:8px;"></th>
+                <th style="font-size:17px;" colspan="2">Name</th>
+            </tr>        
+            <tr>
+                <td>box</td>
+                <td>CDR 1</td>
+            </tr>
+            <tr>
+                    <td>box</td>
+                    <td>CDR 2</td>
+            </tr>
+            <tr>
+                    <td>box</td>
+                    <td>CDR 3</td>
+            </tr>
+            
+        </table>
+
+        <input type='button' id='hide2' value='Hide' style="float:right; font-size: 15px; margin-right: 2%; bottom:0px;">
     </div>
 </div>
 
-    <button ><a style="color:black" href="cdrSelection.html">Back</a></button>
 
+<div style="display: block">
+    <button style="margin-left:2%;"><a style="color:black" href="cdrSelection.html">Back</a></button>
+</div>
       
     <script>require('./renderer.js')</script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
