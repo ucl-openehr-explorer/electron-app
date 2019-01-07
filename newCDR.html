@@ -9,41 +9,35 @@
     <title>openEHR Explorer</title>
   </head>
   <body>
-      <br><br>
-    <h1 style="text-align: center">Select CDRs</h1>
-    <br>
-    <div style="text-align: center"><button style="text-align:center">Add New</button></div>
-    <br>
-    <div>
-        <table align="center" style="width:400px;">
-            <tr>
-                <th>box</th>
-                <th colspan="2">Name</th>
-            </tr>        
-            <tr>
-                <td>box</td>
-                <td>CDR 1</td>
-            </tr>
-            <tr>
-                    <td>box</td>
-                    <td>CDR 2</td>
-            </tr>
-            <tr>
-                    <td>box</td>
-                    <td>CDR 3</td>
-            </tr>
-            
-        </table>
-    </div>
-    
-    <br>
-    
-    <div class="flex">
-        <div class="flex-item"><button class="button" style="left:auto;right:auto"><a style="color:black;" href ="index.html">Not Now</a></button></div>
-        <div class="flex-item"><button class="button" style="text-align: center" ><a style="color:black;" href="templateSelection.html">Continue</a></button></div>
-    </div>
-    <br>
-   
+        <br><br>
+        <h1 style="text-align: center">Add CDR</h1>
+        <br>
+        <div class="inputFields">
+            <label>Name</label>
+            <input id="nameInput" type="text">
+            <br>
+            <label>IP</label>
+            <input id="IPInput" type="text">
+            <br>
+            <label>Port</label>
+            <input id= "portInput" type="text">
+            <br>
+            <label>Username</label>
+            <input id= "usernameInput" type="text">
+            <br>
+            <label>Password</label>
+            <input id= "passwordInput" type="text">
+            <br>
+        </div>
+        
+        <br>
+        
+        <div class="flex">
+            <div class="flex-item"><button class="button" style="left:auto;right:auto"><a style="color:black;" href ="index.html">Not Now</a></button></div>
+            <div class="flex-item"><button class="button" style="text-align: center" onclick="addCDR()" ><a style="color:black;">Continue</a></button></div>
+        </div>
+        <br>
+       
       
     <script>require('./renderer.js')</script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

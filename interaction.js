@@ -1,4 +1,17 @@
+
+var cdrList = [];
+
 var hideButton = document.getElementById('hide'); // Assumes element with id='button'
+
+class cdrObject {
+    constructor(name, ip, port, username, password) {
+        this.name = name;
+        this.ip = ip;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+    }
+}
 
 hideButton.onclick = function() {
     // alert("working")
@@ -63,3 +76,21 @@ CDRShowButton.onclick = function(){
         CDR.style.display = "none";
     }
 };
+
+
+function addCDR(){
+    var name = document.getElementById("nameInput").value;
+    var ip = document.getElementById("IPInput").value;
+    var port = document.getElementById("portInput").value;
+    var username = document.getElementById("usernameInput").value;
+    var password = document.getElementById("passwordInput").value;
+
+    // alert(name + ip + port + username + password);
+
+    cdr = new cdrObject(name,ip,port,username,password)
+    cdrList.push(cdr);
+
+    console.log(cdrList);
+}
+
+

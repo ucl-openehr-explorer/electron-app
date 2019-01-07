@@ -10,9 +10,10 @@
   </head>
   <body>
 
+    <!-- TOP NAVIGATION BAR -->
 
-
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
           <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
               <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
@@ -41,10 +42,10 @@
 
 
 
-<br>
+    <br>
 
 
-
+<!-- AQL -->
 
 <div class = "grid-container">
       <div class = "grid-item" style=" margin-left: 2%; width:500px">
@@ -67,10 +68,11 @@
         </form>
     </div>
     
-
+    <!-- CDRS -->
     
     <div style="display:none" id="mayHide2" class = "grid-item" style="margin-left: 2%; width: 500px;">
         <label for="usr">Select CDRs</label>
+        <button style="float:right; font-size: 15px; margin-right: 2%;"><a style="color: black;" href="newCDR.html">Add New</a></button>
         <table style="width:450px;" class= "smallTR">
             <tr>
                 <th style="width:8px;"></th>
@@ -91,13 +93,20 @@
             
         </table>
 
-        <input type='button' id='hide2' value='Hide' style="float:right; font-size: 15px; margin-right: 2%; bottom:0px;">
+
+        <!-- <input type='button' id='hide2' value='Hide' style="float:right; font-size: 15px; margin-right: 2%; bottom:0px;"> -->
+        <br>
+        <div>
+        <button id = "hide2" style="float:right; font-size: 15px; margin-right: 2%;"><a style="color: black;" href="newCDR.html"></a>Hide</button>
+        </div>
     </div>
 </div>
 
 
 <div style="display: block">
     <button style="margin-left:2%;"><a style="color:black" href="cdrSelection.html">Back</a></button>
+    
+
 </div>
       
     <script>require('./renderer.js')</script>
