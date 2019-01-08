@@ -13,32 +13,48 @@
         <h1 style="text-align: center">Add CDR</h1>
         <br>
         <div class="inputFields">
-            <label>Name</label>
+            <!-- <label>Name</label>
             <input id="nameInput" type="text">
             <br>
-            <label>IP</label>
-            <input id="IPInput" type="text">
-            <br>
-            <label>Port</label>
-            <input id= "portInput" type="text">
+            <label>URL</label>
+            <input id="urlInput" type="text">
             <br>
             <label>Username</label>
             <input id= "usernameInput" type="text">
             <br>
             <label>Password</label>
             <input id= "passwordInput" type="text">
-            <br>
-        </div>
-        
-        <br>
-        
-        <div class="flex">
-            <div class="flex-item"><button class="button" style="left:auto;right:auto"><a style="color:black;" href ="index.html">Not Now</a></button></div>
-            <div class="flex-item"><button class="button" style="text-align: center" onclick="addCDR()" ><a style="color:black;">Continue</a></button></div>
-        </div>
-        <br>
-       
+            <br> -->
+
+            <div style="float:left; text-align: right">
+                <label>Name</label>
+                <br>
+                <label>URL</label>
+                <br>
+                <label>Username</label>
+                <br>
+                <label>Password</label>
+                <br>
+            </div>
+            <div style="float:right">
+                    <input id="nameInput" type="text">
+                    <br>
+                    <input id="urlInput" type="text">
+                    <br>
+                    <input id= "usernameInput" type="text">
+                    <br>
+                    <input id= "passwordInput" type="text">
+                </div>
+            </div>
+            
+            <br><br><br><br><br><br>
+            
+            <div class="flex">
+                <div class="flex-item"><button class="button" style="left:auto;right:auto"><a style="color:black;" href ="index.html">Go Back</a></button></div>
+                <div class="flex-item"><button class="button" style="text-align: center" onclick="addCDR()" ><a style="color:black;">Continue</a></button></div>
+            </div>
       
+    </body>
     <script>require('./renderer.js')</script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -47,5 +63,4 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="interaction.js"></script>
-  </body>
 </html>

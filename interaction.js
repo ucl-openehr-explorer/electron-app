@@ -1,30 +1,24 @@
+var CDR = require('openehr-cdr-query').CDR;
 
-var cdrList = [];
-
-var hideButton = document.getElementById('hide'); // Assumes element with id='button'
-
-class cdrObject {
-    constructor(name, ip, port, username, password) {
-        this.name = name;
-        this.ip = ip;
-        this.port = port;
-        this.username = username;
-        this.password = password;
-    }
-}
-
-hideButton.onclick = function() {
-    // alert("working")
-    var div = document.getElementById('mayHide');
-    if (div.style.display !== 'none') {
-        div.style.display = 'none';
-    }
-    else {
-        div.style.display = 'block';
-    }
-};
 
 var templateShowButton = document.getElementById('templateButton');
+var CDRShowButton = document.getElementById('CDRButton');
+var hideButton = document.getElementById('hide'); 
+var hideButton2 = document.getElementById('hide2'); 
+
+var cdrList = JSON.parse(window.localStorage.getItem("cdrList")) || [];
+
+// hideButton.onclick = function() {
+//     // alert("working")
+//     var div = document.getElementById('mayHide');
+//     if (div.style.display !== 'none') {
+//         div.style.display = 'none';
+//     }
+//     else {
+//         div.style.display = 'block';
+//     }
+// };
+
 
 templateShowButton.onclick = function(){
     var template = document.getElementById('mayHide');
@@ -44,20 +38,18 @@ templateShowButton.onclick = function(){
     }
 };
 
-var hideButton2 = document.getElementById('hide2'); // Assumes element with id='button'
 
-hideButton2.onclick = function() {
-    // alert("working")
-    var div = document.getElementById('mayHide2');
-    if (div.style.display !== 'none') {
-        div.style.display = 'none';
-    }
-    else {
-        div.style.display = 'block';
-    }
-};
+// hideButton2.onclick = function() {
+//     // alert("working")
+//     var div = document.getElementById('mayHide2');
+//     if (div.style.display !== 'none') {
+//         div.style.display = 'none';
+//     }
+//     else {
+//         div.style.display = 'block';
+//     }
+// };
 
-var CDRShowButton = document.getElementById('CDRButton');
 
 CDRShowButton.onclick = function(){
     var template = document.getElementById('mayHide');
@@ -77,20 +69,64 @@ CDRShowButton.onclick = function(){
     }
 };
 
+function cdrObject(name, ip, port, username, password){
+        this.name = name;
+        this.ip = ip;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+}
 
 function addCDR(){
+    //gets the values from textboxes
     var name = document.getElementById("nameInput").value;
-    var ip = document.getElementById("IPInput").value;
-    var port = document.getElementById("portInput").value;
+    var url = document.getElementById("urlInput").value;
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
+    
+    //creates new CDR with input values
+    cdr = new CDR({
+        url: url,
+        authentication: {
+            scheme: 'basic',
+            username: username,
+            password: password
+        }
+    })
+    
+   //adds new CDR to list
+    cdrList.push({
+        name: name,
+        cdr: cdr
+    });
 
-    // alert(name + ip + port + username + password);
+   
 
-    cdr = new cdrObject(name,ip,port,username,password)
-    cdrList.push(cdr);
+    window.localStorage.setItem("cdrList",JSON.stringify(cdrList));
+    alert("CDR added successfully")
+    //emptying textboxes
+    document.getElementById("nameInput").value = '';
+    document.getElementById("urlInput").value = '';
+    document.getElementById("usernameInput").value = '';
+    document.getElementById("passwordInput").value = '';
+
 
     console.log(cdrList);
 }
 
+try{
+    var html = '<table border ="0">';
+    for (var i = 0; i < cdrList.length; i++){
+        html +="<tr>";
+        html +="<td><input type='checkbox' id='" + i + "' name='" + cdrList[i].name + "'>"
+        html +="<td>" + cdrList[i].name + "</td>";
+        html +="<td>" + cdrList[i].cdr.url + "</td>";
 
+        html +="</tr>";
+    }
+    html +="</table>";
+    document.getElementById("displayCDRs").innerHTML = html;
+}
+catch{
+
+}

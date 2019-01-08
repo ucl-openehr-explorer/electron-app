@@ -11,9 +11,11 @@
     font-size: 25px;
   }
 
+  
   table, th, td {
-    border: 1px solid black;
+    /* border: 1px solid rgba(189, 189, 189, 0.8); */
     border-collapse: collapse;
+    border-radius: 30px;
 }
 th, td {
     padding: 5px;
@@ -22,11 +24,14 @@ th, td {
 
 .flex {
   display: flex;
+  /* position: fixed; */
+  margin-left: auto;
+  margin-right: auto;
   justify-content: center;
 }
 
 .flex-item + .flex-item {
-  margin-left: 240px;
+  margin-left: 200px;
 }
 
 .button {
@@ -47,5 +52,9 @@ th, td {
 }
 
 .inputFields{
-  text-align: center;
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+  width:400px;
+  
 }
