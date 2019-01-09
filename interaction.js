@@ -8,6 +8,52 @@ var hideButton2 = document.getElementById('hide2');
 
 var cdrList = JSON.parse(window.localStorage.getItem("cdrList")) || [];
 
+var checkedCDRs = JSON.parse(window.localStorage.getItem("checkedCDRs")) || [];
+// if (checkedCDRs = []){
+//     window.localStorage.setItem("checkedCDRs",checkedCDRs);
+// }
+
+
+try{
+    var html = '<table border ="0">';
+    for (var i = 0; i < cdrList.length; i++){
+        html +="<tr>";
+        
+        
+        if(checkedCDRs[i]==true){ //if CDR has been checked in initial page
+
+            html +="<td><input type='checkbox' checked id='checkbox" + i + "' name='" + cdrList[i].name +  "' onclick='check(" + i + ")'>"
+        }
+        else{
+            console.log(checkedCDRs[i])
+            html +="<td><input type='checkbox'  id='checkbox" + i + "' name='" + cdrList[i].name + "' onclick='check(" + i + ")'>"
+            }
+            html +="<td>" + cdrList[i].name + "</td>";
+            html +="<td>" + cdrList[i].cdr.url + "</td>";
+            
+            html +="</tr>";
+        }
+        html +="</table>";
+        document.getElementById("displayCDRs").innerHTML = html;
+    }
+    catch{
+        
+    }
+
+    // stores array of checked CDRs for passing 
+function check(i){
+    if (document.getElementById('checkbox' + i).checked){ //if just checked      
+        checkedCDRs[i] = true;
+    }
+    else{ //if just unchecked
+        checkedCDRs[i] = false;
+    }
+    console.log(checkedCDRs.length);
+    checkedCDRs = Array.from(checkedCDRs, item => item || false)
+    window.localStorage.setItem("checkedCDRs",JSON.stringify(checkedCDRs));
+    console.log(checkedCDRs)
+}
+    
 // hideButton.onclick = function() {
 //     // alert("working")
 //     var div = document.getElementById('mayHide');
@@ -18,25 +64,49 @@ var cdrList = JSON.parse(window.localStorage.getItem("cdrList")) || [];
 //         div.style.display = 'block';
 //     }
 // };
+try{
+    
+    templateShowButton.onclick = function(){
+        var template = document.getElementById('mayHide');
+        var CDR = document.getElementById('mayHide2');
+        if (template.style.display == 'block' && CDR.style.display == 'none') {
+            template.style.display = 'none';
+        }
+        else if(template.style.display == 'none' && CDR.style.display == 'block') {
+            template.style.display = 'block';
+            CDR.style.display = 'none';
+        }
+        else if(template.style.display == 'none' && CDR.style.display == 'none') {
+            template.style.display = 'block';
+        }
+        else{
+            template.style.display = "none";
+        }
+    };
+    
+    
+    
+    CDRShowButton.onclick = function(){
+        var template = document.getElementById('mayHide');
+        var CDR = document.getElementById('mayHide2');
+        if (CDR.style.display == 'block' && template.style.display == 'none') {
+            CDR.style.display = 'none';
+        }
+        else if(CDR.style.display == 'none' && template.style.display == 'block') {
+            CDR.style.display = 'block';
+            template.style.display = 'none';
+        }
+        else if(CDR.style.display == 'none' && template.style.display == 'none') {
+            CDR.style.display = 'block';
+        }
+        else{
+            CDR.style.display = "none";
+        }
+    };
+}
+catch{
 
-
-templateShowButton.onclick = function(){
-    var template = document.getElementById('mayHide');
-    var CDR = document.getElementById('mayHide2');
-    if (template.style.display == 'block' && CDR.style.display == 'none') {
-        template.style.display = 'none';
-    }
-    else if(template.style.display == 'none' && CDR.style.display == 'block') {
-        template.style.display = 'block';
-        CDR.style.display = 'none';
-    }
-    else if(template.style.display == 'none' && CDR.style.display == 'none') {
-        template.style.display = 'block';
-    }
-    else{
-        template.style.display = "none";
-    }
-};
+}
 
 
 // hideButton2.onclick = function() {
@@ -49,25 +119,6 @@ templateShowButton.onclick = function(){
 //         div.style.display = 'block';
 //     }
 // };
-
-
-CDRShowButton.onclick = function(){
-    var template = document.getElementById('mayHide');
-    var CDR = document.getElementById('mayHide2');
-    if (CDR.style.display == 'block' && template.style.display == 'none') {
-        CDR.style.display = 'none';
-    }
-    else if(CDR.style.display == 'none' && template.style.display == 'block') {
-        CDR.style.display = 'block';
-        template.style.display = 'none';
-    }
-    else if(CDR.style.display == 'none' && template.style.display == 'none') {
-        CDR.style.display = 'block';
-    }
-    else{
-        CDR.style.display = "none";
-    }
-};
 
 function cdrObject(name, ip, port, username, password){
         this.name = name;
@@ -112,21 +163,4 @@ function addCDR(){
 
 
     console.log(cdrList);
-}
-
-try{
-    var html = '<table border ="0">';
-    for (var i = 0; i < cdrList.length; i++){
-        html +="<tr>";
-        html +="<td><input type='checkbox' id='" + i + "' name='" + cdrList[i].name + "'>"
-        html +="<td>" + cdrList[i].name + "</td>";
-        html +="<td>" + cdrList[i].cdr.url + "</td>";
-
-        html +="</tr>";
-    }
-    html +="</table>";
-    document.getElementById("displayCDRs").innerHTML = html;
-}
-catch{
-
 }
