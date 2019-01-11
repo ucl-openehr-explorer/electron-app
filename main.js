@@ -2,7 +2,7 @@
 const {app, BrowserWindow} = require('electron')
 
 require('electron-reload')(__dirname);
- 
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -10,15 +10,16 @@ let mainWindow
 function createWindow () {
 
   'use strict';
- 
- 
+
+
 // Standard stuff
 
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 1100, height: 600})
 
   // and load the index.html of the app.
-  mainWindow.loadFile('cdrSelection.html')
+  // mainWindow.loadFile('cdrSelection.html')
+  mainWindow.loadFile('index.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -37,8 +38,9 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () =>{
   let mainWindow = new BrowserWindow({width: 1100, height: 600});
- 
-  mainWindow.loadURL(`file://${__dirname}/cdrSelection.html`);
+
+  // mainWindow.loadURL(`file://${__dirname}/cdrSelection.html`);
+  mainWindow.loadURL(`file://${__dirname}/index.html`)
   // the rest...
 });
 

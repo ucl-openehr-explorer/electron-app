@@ -46,6 +46,9 @@ try{
 
             html +="</tr>";
         }
+        if (cdrList.length == 0) {
+          html += 'Click "Add New" to add a CDR'
+        }
         html +="</table>";
         document.getElementById("displayCDRs").innerHTML = html;
     }
