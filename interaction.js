@@ -1,25 +1,38 @@
-var CDR = require('openehr-cdr-query').CDR;
+var openehr_cdr_query = require('openehr-cdr-query');
+var CDR = openehr_cdr_query.CDR;
+var CDRs = openehr_cdr_query.CDRs;
 
 
 var templateShowButton = document.getElementById('templateButton');
 var CDRShowButton = document.getElementById('CDRButton');
-var hideButton = document.getElementById('hide'); 
-var hideButton2 = document.getElementById('hide2'); 
+var hideButton = document.getElementById('hide');
+var hideButton2 = document.getElementById('hide2');
 
-var cdrList = JSON.parse(window.localStorage.getItem("cdrList")) || [];
+var cdrList = [];
+var cdrListJSON = JSON.parse(window.localStorage.getItem("cdrList")) || [];
+cdrListJSON.forEach(e => {
+  cdrList.push({
+    name: e.name,
+    cdr: new CDR({
+      url: e.url,
+      authentication: {
+        scheme: 'basic',
+        username: e.username,
+        password: e.password
+      }
+    })
+  })
+})
 
 var checkedCDRs = JSON.parse(window.localStorage.getItem("checkedCDRs")) || [];
-// if (checkedCDRs = []){
-//     window.localStorage.setItem("checkedCDRs",checkedCDRs);
-// }
 
 
 try{
     var html = '<table border ="0">';
     for (var i = 0; i < cdrList.length; i++){
         html +="<tr>";
-        
-        
+
+
         if(checkedCDRs[i]==true){ //if CDR has been checked in initial page
 
             html +="<td><input type='checkbox' checked id='checkbox" + i + "' name='" + cdrList[i].name +  "' onclick='check(" + i + ")'>"
@@ -30,19 +43,19 @@ try{
             }
             html +="<td>" + cdrList[i].name + "</td>";
             html +="<td>" + cdrList[i].cdr.url + "</td>";
-            
+
             html +="</tr>";
         }
         html +="</table>";
         document.getElementById("displayCDRs").innerHTML = html;
     }
     catch{
-        
+
     }
 
-    // stores array of checked CDRs for passing 
+    // stores array of checked CDRs for passing
 function check(i){
-    if (document.getElementById('checkbox' + i).checked){ //if just checked      
+    if (document.getElementById('checkbox' + i).checked){ //if just checked
         checkedCDRs[i] = true;
     }
     else{ //if just unchecked
@@ -53,7 +66,7 @@ function check(i){
     window.localStorage.setItem("checkedCDRs",JSON.stringify(checkedCDRs));
     console.log(checkedCDRs)
 }
-    
+
 // hideButton.onclick = function() {
 //     // alert("working")
 //     var div = document.getElementById('mayHide');
@@ -65,7 +78,7 @@ function check(i){
 //     }
 // };
 try{
-    
+
     templateShowButton.onclick = function(){
         var template = document.getElementById('mayHide');
         var CDR = document.getElementById('mayHide2');
@@ -83,9 +96,9 @@ try{
             template.style.display = "none";
         }
     };
-    
-    
-    
+
+
+
     CDRShowButton.onclick = function(){
         var template = document.getElementById('mayHide');
         var CDR = document.getElementById('mayHide2');
@@ -134,33 +147,45 @@ function addCDR(){
     var url = document.getElementById("urlInput").value;
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
-    
-    //creates new CDR with input values
-    cdr = new CDR({
+
+    cdrList.push({
+      name: name,
+      cdr: new CDR({
         url: url,
         authentication: {
-            scheme: 'basic',
-            username: username,
-            password: password
+          scheme: 'basic',
+          username: username,
+          password: password
         }
-    })
-    
-   //adds new CDR to list
-    cdrList.push({
-        name: name,
-        cdr: cdr
+      })
     });
 
-   
+    cdrListJSON.push({
+      name: name,
+      url: url,
+      username: username,
+      password: password
+    })
 
-    window.localStorage.setItem("cdrList",JSON.stringify(cdrList));
+    window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
     alert("CDR added successfully")
     //emptying textboxes
     document.getElementById("nameInput").value = '';
     document.getElementById("urlInput").value = '';
     document.getElementById("usernameInput").value = '';
     document.getElementById("passwordInput").value = '';
-
-
-    console.log(cdrList);
 }
+
+document.getElementById('aqlForm').addEventListener('submit', e => {
+  e.preventDefault();
+  var aql = e.target[0].value
+  var cdrsToQuery = cdrList.filter((_, i) => checkedCDRs[i]).map(e => e.cdr)
+  var resultArea = document.getElementById('results')
+  new CDRs(cdrsToQuery).query(aql).all().concat().then(result => {
+    console.log(result)
+    resultArea.value = JSON.stringify(result, null, 2)
+  }).catch(error => {
+    console.error(error)
+    resultArea.value = error
+  })
+})

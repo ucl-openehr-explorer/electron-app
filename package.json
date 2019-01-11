@@ -21,6 +21,6 @@
     "electron-reload": "^1.4.0"
   },
   "dependencies": {
-    "openehr-cdr-query": "0.0.1"
+    "openehr-cdr-query": "0.0.3"
   }
 }

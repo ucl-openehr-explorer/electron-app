@@ -12,21 +12,21 @@
 
     <!-- TOP NAVIGATION BAR -->
 
-      
+
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
           <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
               <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
                       <a class="nav-link" href="#">Query</a>
                   </li>
-<!--                   
+<!--
                   <li class="nav-item">
                       <a class="nav-link" href="#">Input</a>
                   </li> -->
               </ul>
           </div>
-          
-       
+
+
           <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
               <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
@@ -37,7 +37,7 @@
                   </li> -->
               </ul>
           </div>
-    
+
       </nav>
 
 
@@ -49,13 +49,19 @@
 
 <div class = "grid-container">
       <div class = "grid-item" style=" margin-left: 2%; width:500px">
-          <form>
+          <form id="aqlForm">
             <div class="form-group">
               <label for="usr">AQL</label>
-                  <textarea style="width:450px;" class="form-control" rows="7" placeholder="Write your AQL code here" required></textarea>
+                  <textarea name="aql" style="width:450px;" class="form-control" rows="7" placeholder="Write your AQL code here" required></textarea>
             </div>
             <button style="float: right; font-size: 15px; margin-right:2%">Query</button>
+            <div style="clear:both"></div>
           </form>
+
+          <div class="form-group">
+            <label for="usr">Results:</label>
+            <textarea id="results" style="width:450px;" class="form-control" rows="7" readonly></textarea>
+          </div>
         </div>
 
     <!-- TEMPLATES     -->
@@ -68,25 +74,25 @@
             <!-- <button id='hide' value='Hide' style="float:right; font-size: 15px; margin-right: 2%"> -->
         </form>
     </div>
-    
+
     <!-- CDRS -->
- 
+
     <div style="display:block" id="mayHide2" class = "grid-item" style="margin-left: 2%; width: 500px;">
         <label for="usr">Select CDRs</label>
         <button style="float:right; font-size: 15px; margin-right: 2%;"><a style="color: black;" href="newCDR.html">Add New</a></button>
 
         <div style = "font-size: 20px; height: 270px; overflow: auto;" id ="displayCDRs"></div>
-        
+
     </div>
 </div>
 
 
 <div style="display: block">
     <button style="font-size: 15px; margin-left: 3%;"><a style="color: black;" href="cdrSelection.html">Back</a></button>
-    
+
 
 </div>
-      
+
 </body>
 <!-- <script>require('./renderer.js')</script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
