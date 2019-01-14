@@ -21,6 +21,8 @@
     "electron-reload": "^1.4.0"
   },
   "dependencies": {
-    "openehr-cdr-query": "0.0.3"
+    "openehr-cdr-query": "0.0.3",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   }
 }
