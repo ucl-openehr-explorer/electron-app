@@ -5,7 +5,7 @@ require('electron-reload')(__dirname);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
+let mainWindow = new BrowserWindow();
 
 function createWindow () {
 
@@ -15,8 +15,9 @@ function createWindow () {
 // Standard stuff
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1100, height: 600})
-
+  mainWindow = new BrowserWindow({width: 1100, height: 600, show:false})
+  mainWindow.maximize();
+  mainWindow.show();
   // and load the index.html of the app.
   // mainWindow.loadFile('cdrSelection.html')
   mainWindow.loadFile('index.html')
@@ -31,13 +32,21 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+
+  
+}
+function reloadWindow(){
+  mainWindow.reload();
+
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () =>{
-  let mainWindow = new BrowserWindow({width: 1100, height: 600});
+  let mainWindow = new BrowserWindow({width: 1100, height: 600, show:false});
+  mainWindow.maximize();
+  mainWindow.show();
 
   // mainWindow.loadURL(`file://${__dirname}/cdrSelection.html`);
   mainWindow.loadURL(`file://${__dirname}/index.html`)

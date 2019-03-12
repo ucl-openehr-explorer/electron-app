@@ -35,11 +35,11 @@ try{
 
         if(checkedCDRs[i]==true){ //if CDR has been checked in initial page
 
-            html +="<td><input type='checkbox' checked id='checkbox" + i + "' name='" + cdrList[i].name +  "' onclick='check(" + i + ")'>"
+            html +="<td><input type='image' id='delete" + i + "' src='bin1.png' style='width:25px; margin-right:15px;' onclick='deleteCDR(" + i + ")'><input type='checkbox' checked id='checkbox" + i + "' name='" + cdrList[i].name +  "' onclick='check(" + i + ")'>"
         }
         else{
             console.log(checkedCDRs[i])
-            html +="<td><input type='checkbox'  id='checkbox" + i + "' name='" + cdrList[i].name + "' onclick='check(" + i + ")'>"
+            html +="<td><input type='image' id='delete" + i + "' src='bin1.png' style='width:25px; margin-right:15px;' onclick='deleteCDR(" + i + ")'><input type='checkbox' id='checkbox" + i + "' name='" + cdrList[i].name + "' onclick='check(" + i + ")'>"
             }
             html +="<td>" + cdrList[i].name + "</td>";
             html +="<td>" + cdrList[i].cdr.url + "</td>";
@@ -55,6 +55,27 @@ try{
     catch{
 
     }
+
+function deleteCDR(i){
+  
+
+  if(confirm('Are you sure you want to delete \'' + cdrList[i].name + '\' from the CDR list?')){
+
+    cdrList.splice(i,1);
+    checkedCDRs.splice(i,1);
+    
+    
+    window.localStorage.setItem("cdrList",JSON.stringify(cdrList));
+    window.localStorage.setItem("checkedCDRs",JSON.stringify(checkedCDRs));
+  
+    
+    console.log(cdrList);
+    location.reload();
+  } else {
+
+  }
+
+}
 
     // stores array of checked CDRs for passing
 function check(i){
