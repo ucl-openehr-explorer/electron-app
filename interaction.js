@@ -202,7 +202,12 @@ function addCDR(){
 
 function userLogon() {
   //get the values from the text box
-  var loginName = document.getElementById("loginName").value;
+  loginName = document.getElementById("loginName").value;
+  //save the value into temporary session storage
+  window.sessionStorage.setItem("loginName", loginName);
+  //emptying textbox
+  document.getElementById("loginName").value = '';
+
   return true;
 }
 
