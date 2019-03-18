@@ -13,6 +13,7 @@ var cdrListJSON = JSON.parse(window.localStorage.getItem("cdrList")) || [];
 cdrListJSON.forEach(e => {
   cdrList.push({
     name: e.name,
+    loginName: e.loginName,
     cdr: new CDR({
       url: e.url,
       authentication: {
@@ -30,22 +31,26 @@ var checkedCDRs = JSON.parse(window.localStorage.getItem("checkedCDRs")) || [];
 try{
     var html = '<table border ="0">';
     for (var i = 0; i < cdrList.length; i++){
-        html +="<tr>";
+        //check if CDR loginName is same as the one currently logged in
+        if (cdrList[i].loginName === window.sessionStorage.getItem("loginName")) {
+
+            html +="<tr>";
 
 
-        if(checkedCDRs[i]==true){ //if CDR has been checked in initial page
+            if(checkedCDRs[i]==true){ //if CDR has been checked in initial page
 
-            html +="<td><input type='image' id='delete" + i + "' src='bin1.png' style='width:25px; margin-right:15px;' onclick='deleteCDR(" + i + ")'><input type='checkbox' checked id='checkbox" + i + "' name='" + cdrList[i].name +  "' onclick='check(" + i + ")'>"
-        }
-        else{
-            console.log(checkedCDRs[i])
-            html +="<td><input type='image' id='delete" + i + "' src='bin1.png' style='width:25px; margin-right:15px;' onclick='deleteCDR(" + i + ")'><input type='checkbox' id='checkbox" + i + "' name='" + cdrList[i].name + "' onclick='check(" + i + ")'>"
+                html +="<td><input type='image' id='delete" + i + "' src='bin1.png' style='width:25px; margin-right:15px;' onclick='deleteCDR(" + i + ")'><input type='checkbox' checked id='checkbox" + i + "' name='" + cdrList[i].name +  "' onclick='check(" + i + ")'>"
+            }
+            else{
+                console.log(checkedCDRs[i])
+                html +="<td><input type='image' id='delete" + i + "' src='bin1.png' style='width:25px; margin-right:15px;' onclick='deleteCDR(" + i + ")'><input type='checkbox' id='checkbox" + i + "' name='" + cdrList[i].name + "' onclick='check(" + i + ")'>"
             }
             html +="<td>" + cdrList[i].name + "</td>";
             html +="<td>" + cdrList[i].cdr.url + "</td>";
 
             html +="</tr>";
         }
+    }
         if (cdrList.length == 0) {
           html += 'Click "Add New" to add a CDR'
         }
@@ -172,8 +177,12 @@ function addCDR(){
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
 
+    //get currently logged in username from sesison storage
+    var loginName = window.sessionStorage.getItem("loginName");
+
     cdrList.push({
       name: name,
+      loginName: loginName,
       cdr: new CDR({
         url: url,
         authentication: {
@@ -186,6 +195,7 @@ function addCDR(){
 
     cdrListJSON.push({
       name: name,
+      loginName: loginName,
       url: url,
       username: username,
       password: password

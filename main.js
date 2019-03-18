@@ -18,9 +18,9 @@ function createWindow () {
   mainWindow = new BrowserWindow({width: 1100, height: 600, show:false})
   mainWindow.maximize();
   mainWindow.show();
-  // and load the index.html of the app.
+  // and load the userLogin.html of the app.
   // mainWindow.loadFile('cdrSelection.html')
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('userLogin.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -49,7 +49,7 @@ app.on('ready', () =>{
   mainWindow.show();
 
   // mainWindow.loadURL(`file://${__dirname}/cdrSelection.html`);
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  mainWindow.loadURL(`file://${__dirname}/userLogin.html`)
   // the rest...
 });
 
