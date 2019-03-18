@@ -200,6 +200,12 @@ function addCDR(){
     document.getElementById("passwordInput").value = '';
 }
 
+function userLogon() {
+  //get the values from the text box
+  var loginName = document.getElementById("loginName").value;
+  return true;
+}
+
 document.getElementById('aqlForm').addEventListener('submit', e => {
   e.preventDefault();
   var aql = e.target[0].value
