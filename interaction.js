@@ -14,6 +14,7 @@ cdrListJSON.forEach(e => {
   cdrList.push({
     name: e.name,
     loginName: e.loginName,
+    url: e.url,
     cdr: new CDR({
       url: e.url,
       authentication: {
@@ -82,24 +83,24 @@ function deleteCDR(i){
 
 }
 
-    // stores array of checked CDRs for passing
+
+// stores array of checked CDRs for passing
 function check(i){
-    if (document.getElementById('checkbox' + i).checked){ //if just checked
+  if (document.getElementById('checkbox' + i).checked){ //if just checked
         checkedCDRs[i] = true;
     }
     else{ //if just unchecked
         checkedCDRs[i] = false;
-    }
+      }
     console.log(checkedCDRs.length);
     checkedCDRs = Array.from(checkedCDRs, item => item || false)
     window.localStorage.setItem("checkedCDRs",JSON.stringify(checkedCDRs));
     console.log(checkedCDRs)
-}
+  }
 
-// hideButton.onclick = function() {
+  // hideButton.onclick = function() {
 //     // alert("working")
 //     var div = document.getElementById('mayHide');
-//     if (div.style.display !== 'none') {
 //         div.style.display = 'none';
 //     }
 //     else {
@@ -107,60 +108,49 @@ function check(i){
 //     }
 // };
 try{
-
+  
     templateShowButton.onclick = function(){
-        var template = document.getElementById('mayHide');
+      var template = document.getElementById('mayHide');
         var CDR = document.getElementById('mayHide2');
         if (template.style.display == 'block' && CDR.style.display == 'none') {
-            template.style.display = 'none';
+          template.style.display = 'none';
         }
         else if(template.style.display == 'none' && CDR.style.display == 'block') {
-            template.style.display = 'block';
-            CDR.style.display = 'none';
+          template.style.display = 'block';
+          CDR.style.display = 'none';
         }
         else if(template.style.display == 'none' && CDR.style.display == 'none') {
-            template.style.display = 'block';
+          template.style.display = 'block';
         }
         else{
-            template.style.display = "none";
+          template.style.display = "none";
         }
-    };
+      };
 
-
-
-    CDRShowButton.onclick = function(){
+      
+      
+      CDRShowButton.onclick = function(){
         var template = document.getElementById('mayHide');
         var CDR = document.getElementById('mayHide2');
         if (CDR.style.display == 'block' && template.style.display == 'none') {
-            CDR.style.display = 'none';
+          CDR.style.display = 'none';
         }
         else if(CDR.style.display == 'none' && template.style.display == 'block') {
-            CDR.style.display = 'block';
-            template.style.display = 'none';
+          CDR.style.display = 'block';
+          template.style.display = 'none';
         }
         else if(CDR.style.display == 'none' && template.style.display == 'none') {
             CDR.style.display = 'block';
-        }
-        else{
+          }
+          else{
             CDR.style.display = "none";
         }
     };
-}
+  }
 catch{
-
+  
 }
 
-
-// hideButton2.onclick = function() {
-//     // alert("working")
-//     var div = document.getElementById('mayHide2');
-//     if (div.style.display !== 'none') {
-//         div.style.display = 'none';
-//     }
-//     else {
-//         div.style.display = 'block';
-//     }
-// };
 
 function cdrObject(name, ip, port, username, password){
         this.name = name;
@@ -168,18 +158,18 @@ function cdrObject(name, ip, port, username, password){
         this.port = port;
         this.username = username;
         this.password = password;
-}
-
+      }
+      
 function addCDR(){
-    //gets the values from textboxes
+  //gets the values from textboxes
     var name = document.getElementById("nameInput").value;
     var url = document.getElementById("urlInput").value;
     var username = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
-
+    
     //get currently logged in username from sesison storage
     var loginName = window.sessionStorage.getItem("loginName");
-
+    
     cdrList.push({
       name: name,
       loginName: loginName,
@@ -217,9 +207,10 @@ function userLogon() {
   window.sessionStorage.setItem("loginName", loginName);
   //emptying textbox
   document.getElementById("loginName").value = '';
-
+  
   return true;
 }
+var localResults = [];
 
 document.getElementById('aqlForm').addEventListener('submit', e => {
   e.preventDefault();
@@ -227,6 +218,7 @@ document.getElementById('aqlForm').addEventListener('submit', e => {
   var cdrsToQuery = cdrList.filter((_, i) => checkedCDRs[i]).map(e => e.cdr)
   var resultArea = document.getElementById('results')
   new CDRs(cdrsToQuery).query(aql).all().concat().then(result => {
+    localResults = result;
     console.log(result)
     resultArea.value = JSON.stringify(result, null, 2)
   }).catch(error => {
@@ -234,3 +226,63 @@ document.getElementById('aqlForm').addEventListener('submit', e => {
     resultArea.value = error
   })
 })
+
+
+
+function CreateTableFromJSON() {
+  
+      
+    tableVar = localResults.pop().resultSet;
+    for(var r = 0; r < tableVar.length; r++){ //adding row number
+      
+      tableVar[r][0] = r + 1;
+    }
+    console.log(tableVar);
+
+    // EXTRACT VALUE FOR HTML HEADER. 
+    var col = [];
+    for (var i = 0; i < tableVar.length; i++) {
+        for (var key in tableVar[i]) {
+            if (col.indexOf(key) === -1) {
+                col.push(key);
+            }
+        }
+    }
+    
+    
+    // CREATE DYNAMIC TABLE.
+    var table = document.createElement("table");
+
+    // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+    var tr = table.insertRow(-1);                   // TABLE ROW.
+    
+    for (var i = 0; i < col.length; i++) {
+      var th = document.createElement("th");      // TABLE HEADER.
+      th.innerHTML = col[i];
+      tr.appendChild(th);
+    }
+    
+    // ADD JSON DATA TO THE TABLE AS ROWS.
+    for (var i = 0; i < tableVar.length; i++) {
+      
+      tr = table.insertRow(-1);
+      
+      for (var j = 0; j < col.length; j++) {
+        
+        var tabCell = tr.insertCell(-1);
+        
+        var outputCell = JSON.stringify(tableVar[i][col[j]])
+        
+        tabCell.innerHTML = outputCell;
+      }
+    }
+    
+
+    // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+    var divContainer = document.getElementById("showData");
+    divContainer.innerHTML = "";
+    divContainer.appendChild(table);
+}
+
+//     if (div.style.display !== 'none') {
