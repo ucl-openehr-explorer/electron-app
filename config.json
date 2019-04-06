@@ -1,0 +1,23 @@
+[
+  {
+    "name": "c4h_nutshell",
+    "loginName": "daniel",
+    "url": "https://cdr.code4health.org",
+    "username": "ianmcnicoll_98aa716e-8bc6-40f6-a5a3-84518c4c60ef",
+    "password": "$2a$10$7RUqg"
+  },
+  {
+    "name": "ichirf",
+    "loginName": "daniel",
+    "url": "https://cdr.ichirf.inidus.cloud",
+    "username": "ichirf",
+    "password": "sA3w4Hwm"
+  },
+  {
+    "name": "ethercis_cloud",
+    "loginName": "daniel",
+    "url": "http://178.62.71.220:8080",
+    "username": "guest",
+    "password": "guest"
+  }
+]

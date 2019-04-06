@@ -1,6 +1,7 @@
 var openehr_cdr_query = require('openehr-cdr-query');
 var CDR = openehr_cdr_query.CDR;
 var CDRs = openehr_cdr_query.CDRs;
+var fs = require('fs');
 
 
 var templateShowButton = document.getElementById('templateButton');
@@ -10,6 +11,8 @@ var hideButton2 = document.getElementById('hide2');
 
 var cdrList = [];
 var cdrListJSON = JSON.parse(window.localStorage.getItem("cdrList")) || [];
+//Read from config file.
+//var cdrListJSON = JSON.parse(fs.readFileSync('config.json')) || [];
 cdrListJSON.forEach(e => {
   cdrList.push({
     name: e.name,
@@ -72,6 +75,16 @@ function deleteCDR(i){
     
     
     window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
+    //updating config json file
+    try{
+      fs.writeFileSync('config.json', JSON.stringify(cdrListJSON, null, 2));
+    } catch (err) {
+      throw err;
+    }
+    // fs.writeFile('config.json', JSON.stringify(cdrListJSON, null, 2), function(err) {
+    //   if (err) throw err;
+    //   console.log('Deleted CDR from configuration file.')
+    // });
     window.localStorage.setItem("checkedCDRs",JSON.stringify(checkedCDRs));
   
     
@@ -184,6 +197,16 @@ function addCDR(){
       });
 
     window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
+    //writing to config json file
+    try{
+      fs.writeFileSync('config.json', JSON.stringify(cdrListJSON, null, 2));
+    } catch (err) {
+      throw err;
+    }
+    // fs.writeFile('config.json', JSON.stringify(cdrListJSON, null, 2), function(err) {
+    //   if (err) throw err;
+    //   console.log('Configuration Saved');
+    // });
     alert("CDR added successfully")
     //emptying textboxes
     document.getElementById("nameInput").value = '';
