@@ -67,11 +67,11 @@ function deleteCDR(i){
 
   if(confirm('Are you sure you want to delete \'' + cdrList[i].name + '\' from the CDR list?')){
 
-    cdrList.splice(i,1);
+    cdrListJSON.splice(i,1);
     checkedCDRs.splice(i,1);
     
     
-    window.localStorage.setItem("cdrList",JSON.stringify(cdrList));
+    window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
     window.localStorage.setItem("checkedCDRs",JSON.stringify(checkedCDRs));
   
     
@@ -92,21 +92,11 @@ function check(i){
     else{ //if just unchecked
         checkedCDRs[i] = false;
       }
-    console.log(checkedCDRs.length);
     checkedCDRs = Array.from(checkedCDRs, item => item || false)
     window.localStorage.setItem("checkedCDRs",JSON.stringify(checkedCDRs));
-    console.log(checkedCDRs)
   }
 
-  // hideButton.onclick = function() {
-//     // alert("working")
-//     var div = document.getElementById('mayHide');
-//         div.style.display = 'none';
-//     }
-//     else {
-//         div.style.display = 'block';
-//     }
-// };
+ 
 try{
   
     templateShowButton.onclick = function(){
@@ -173,6 +163,7 @@ function addCDR(){
     cdrList.push({
       name: name,
       loginName: loginName,
+      url: url,
       cdr: new CDR({
         url: url,
         authentication: {
@@ -189,7 +180,8 @@ function addCDR(){
       url: url,
       username: username,
       password: password
-    })
+        
+      });
 
     window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
     alert("CDR added successfully")
@@ -216,6 +208,7 @@ document.getElementById('aqlForm').addEventListener('submit', e => {
   e.preventDefault();
   var aql = e.target[0].value
   var cdrsToQuery = cdrList.filter((_, i) => checkedCDRs[i]).map(e => e.cdr)
+  console.log(cdrsToQuery);
   var resultArea = document.getElementById('results')
   new CDRs(cdrsToQuery).query(aql).all().concat().then(result => {
     localResults = result;
