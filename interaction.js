@@ -35,6 +35,8 @@ var checkedCDRs = JSON.parse(window.localStorage.getItem("checkedCDRs")) || [];
 try{
     var html = '<table border ="0">';
     for (var i = 0; i < cdrList.length; i++){
+        //temporary solution to invisible checked CDRs
+        checkedCDRs[i]=false;
         //check if CDR loginName is same as the one currently logged in
         if (cdrList[i].loginName === window.sessionStorage.getItem("loginName")) {
 
@@ -74,7 +76,7 @@ function deleteCDR(i){
     checkedCDRs.splice(i,1);
     
     
-    window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
+    //window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
     //updating config json file
     try{
       fs.writeFileSync('config.json', JSON.stringify(cdrListJSON, null, 2));
@@ -197,7 +199,7 @@ function addCDR(){
         
       });
 
-    window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
+    //window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
     //writing to config json file
     try{
       fs.writeFileSync('config.json', JSON.stringify(cdrListJSON, null, 2));
