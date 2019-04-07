@@ -40,6 +40,8 @@ try{
 
             html +="<tr>";
 
+            //temporary solution of invisible checked CDR
+            checkedCDRs[i]==false;
 
             if(checkedCDRs[i]==true){ //if CDR has been checked in initial page
 
@@ -74,7 +76,7 @@ function deleteCDR(i){
     checkedCDRs.splice(i,1);
     
     
-    window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
+    //window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
     //updating config json file
     try{
       fs.writeFileSync('config.json', JSON.stringify(cdrListJSON, null, 2));
@@ -197,7 +199,7 @@ function addCDR(){
         
       });
 
-    window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
+    //window.localStorage.setItem("cdrList",JSON.stringify(cdrListJSON));
     //writing to config json file
     try{
       fs.writeFileSync('config.json', JSON.stringify(cdrListJSON, null, 2));
