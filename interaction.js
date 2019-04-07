@@ -10,9 +10,9 @@ var hideButton = document.getElementById('hide');
 var hideButton2 = document.getElementById('hide2');
 
 var cdrList = [];
-var cdrListJSON = JSON.parse(window.localStorage.getItem("cdrList")) || [];
+//var cdrListJSON = JSON.parse(window.localStorage.getItem("cdrList")) || [];
 //Read from config file.
-//var cdrListJSON = JSON.parse(fs.readFileSync('config.json')) || [];
+var cdrListJSON = JSON.parse(fs.readFileSync('config.json')) || [];
 cdrListJSON.forEach(e => {
   cdrList.push({
     name: e.name,
@@ -81,6 +81,7 @@ function deleteCDR(i){
     } catch (err) {
       throw err;
     }
+    // below is unsynchronised
     // fs.writeFile('config.json', JSON.stringify(cdrListJSON, null, 2), function(err) {
     //   if (err) throw err;
     //   console.log('Deleted CDR from configuration file.')
@@ -203,6 +204,7 @@ function addCDR(){
     } catch (err) {
       throw err;
     }
+    // below is unsynchronised
     // fs.writeFile('config.json', JSON.stringify(cdrListJSON, null, 2), function(err) {
     //   if (err) throw err;
     //   console.log('Configuration Saved');
