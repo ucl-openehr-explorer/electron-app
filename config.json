@@ -19,5 +19,47 @@
     "url": "http://178.62.71.220:8080",
     "username": "guest",
     "password": "guest"
+  },
+  {
+    "name": "example1",
+    "loginName": "chris",
+    "url": "url1",
+    "username": "asd",
+    "password": "sd"
+  },
+  {
+    "name": "example2",
+    "loginName": "chris",
+    "url": "url2",
+    "username": "asd",
+    "password": "asd"
+  },
+  {
+    "name": "example3",
+    "loginName": "chris",
+    "url": "url3",
+    "username": "asd",
+    "password": "asd"
+  },
+  {
+    "name": "peterCDR1",
+    "loginName": "peter",
+    "url": "url_example",
+    "username": "",
+    "password": ""
+  },
+  {
+    "name": "peterCDR2",
+    "loginName": "peter",
+    "url": "url_example",
+    "username": "",
+    "password": ""
+  },
+  {
+    "name": "c4h_nutshell",
+    "loginName": "ian",
+    "url": "https://cdr.code4health.org",
+    "username": "ianmcnicoll_98aa716e-8bc6-40f6-a5a3-84518c4c60ef",
+    "password": "$2a$10$7RUqg"
   }
 ]

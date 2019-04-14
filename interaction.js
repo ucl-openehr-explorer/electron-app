@@ -239,6 +239,7 @@ document.getElementById('aqlForm').addEventListener('submit', e => {
   var resultArea = document.getElementById('results')
   new CDRs(cdrsToQuery).query(aql).all().concat().then(result => {
     localResults = result;
+    localStorage.setItem('tableResults', JSON.stringify(result));
     console.log(result)
     resultArea.value = JSON.stringify(result, null, 2)
   }).catch(error => {
@@ -249,9 +250,26 @@ document.getElementById('aqlForm').addEventListener('submit', e => {
 
 
 
-function CreateTableFromJSON() {
-  
-      
+function CreateResultsWindow() {
+    const remote = require('electron').remote;
+    const BrowserWindow = remote.BrowserWindow;
+
+    var win = new BrowserWindow({ width: 600, height: 600 });
+    win.loadFile('results.html'); 
+
+    win.on('closed', function () {
+      win = null
+    })
+    
+    
+  }
+
+ 
+  function createTable(){
+    
+    localResults = localStorage.getItem('tableResults');
+    localResults = JSON.parse(localResults);
+    console.log(localResults)
     tableVar = localResults.pop().resultSet;
     for(var r = 0; r < tableVar.length; r++){ //adding row number
       

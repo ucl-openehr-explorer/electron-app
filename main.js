@@ -31,20 +31,24 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
+    app.quit();
   })
 
+  
   
 }
 function reloadWindow(){
   mainWindow.reload();
 
 }
-
+app.on('window-all-closed', () => {
+  app.quit();
+});
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () =>{
-  let mainWindow = new BrowserWindow({width: 1100, height: 600, show:false});
+  let mainWindow = new BrowserWindow({width: 1100, height: 600, show:false, resizable: false});
   mainWindow.maximize();
   mainWindow.show();
 
